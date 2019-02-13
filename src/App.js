@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 //Todo
-function Todo({ todo, index, completeTodo }) {
+function Todo({ todo, index, completeTodo, removeTodo }) {
   return (
     <div
       className="todo"
@@ -11,6 +11,7 @@ function Todo({ todo, index, completeTodo }) {
 
       <div>
         <button onClick={() => completeTodo(index)}>Complete</button>
+        <button onClick={() => removeTodo(index)}>x</button>
       </div>
     </div>
   );
@@ -86,6 +87,7 @@ function App() {
             index={index}
             todo={todo}
             completeTodo={completeTodo}
+            removeTodo={removeTodo}
           />
         ))}
         <TodoForm addTodo={addTodo} />
