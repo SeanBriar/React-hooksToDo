@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 const Todo = ({ todo }) => <div className="todo">{todo.text}</div>;
+
 // Add a todo
 function TodoForm({ addTodo }) {
   const [value, setValue] = useState("");
@@ -25,7 +26,7 @@ function TodoForm({ addTodo }) {
   );
 }
 
-
+// main component
 function App() {
   const [todos, setTodos] = useState([
     { text: "Learn about React" },
@@ -38,7 +39,6 @@ function App() {
       setTodos(newTodos);
     };
 
-  // we'll render our todos here ...
   return (
     <div className="app">
       <div className="todo-list">
