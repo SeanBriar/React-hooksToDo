@@ -1,7 +1,20 @@
 import React, { useState } from 'react';
 import './App.css';
 
-const Todo = ({ todo }) => <div className="todo">{todo.text}</div>;
+//Todo
+function Todo({ todo, index, completeTodo }) {
+  return (
+    <div
+      className="todo"
+      style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}>
+      {todo.text}
+
+      <div>
+        <button onClick={() => completeTodo(index)}>Complete</button>
+      </div>
+    </div>
+  );
+}
 
 // Add a todo
 function TodoForm({ addTodo }) {
@@ -29,15 +42,40 @@ function TodoForm({ addTodo }) {
 // main component
 function App() {
   const [todos, setTodos] = useState([
-    { text: "Learn about React" },
-    { text: "Meet friend for lunch" },
-    { text: "Build really cool todo app" }
+    {
+      text: "Learn about React",
+      isCompleted: false
+    },
+    {
+      text: "Meet friend for lunch",
+      isCompleted: false
+    },
+    {
+      text: "Build really cool todo app",
+      isCompleted: false
+    }
   ]);
 
+  // adds a new todo object to the array
   const addTodo = text => {
-      const newTodos = [...todos, { text }];
-      setTodos(newTodos);
+    const newTodos = [...todos, { text }];
+    setTodos(newTodos);
     };
+
+  //changes isCompleted to true using the stodo's index
+  const completeTodo = index => {
+    const newTodos = [...todos];
+    newTodos[index].isCompleted = true;
+    setTodos(newTodos);
+  };
+
+  //deletes todo
+  const removeTodo = index => {
+    const newTodos = [...todos];
+    newTodos.splice(index, 1);
+    setTodos(newTodos);
+   };
+
 
   return (
     <div className="app">
@@ -47,6 +85,7 @@ function App() {
             key={index}
             index={index}
             todo={todo}
+            completeTodo={completeTodo}
           />
         ))}
         <TodoForm addTodo={addTodo} />
